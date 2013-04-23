@@ -32,8 +32,8 @@ translate([length-43.6,width-12,height]){
 	cube([10,10,13]);
 	translate([5,19,8])
 	rotate([90,0,0])
-	color("silver")
-	cylinder(h = 9, r = 4.15);
+	color([.9,.9,.9])
+	cylinder(h = 9.3, r = 4.15, $fs=.5);
 }
 }
 
@@ -41,12 +41,12 @@ module audio ()
 {
 //audio jack
 translate([length-26,width-11.5,height]){
-	color("yellow")
-	cube([12,11.5,13]);
-	translate([6,11.5,8])
+	color([.4,.4,.95])
+	cube([12.1,11.5,10.1]);
+	translate([6,11.5,10.1-(6.7/2)])
 	rotate([-90,0,0])
-	color("silver")
-	cylinder(h = 3.5, r = 4.15);
+	color([.4,.4,.95])
+	cylinder(h = 3.5, r = 6.7/2, $fs=.5);
 }
 }
 
@@ -81,24 +81,27 @@ module mhole ()
 }
 
 
-
-translate([-length/2,width/2 + 10,0])
+module rpi ()
 {
-difference () {
-   color([0.2,0.5,0])
-   linear_extrude(height = height)
-   square([length,width]); //pcb
-   translate ([25.5, 18,-0.1]) mhole (); 
-  translate ([length-5, width-12.5, -0.1]) mhole (); 
+ // translate([-length/2,width/2 + 10,0]) {
+{
+  difference () {
+    color([0.2,0.5,0])
+    linear_extrude(height = height)
+    square([length,width]); //pcb
+    translate ([25.5, 18,-0.1]) mhole (); 
+    translate ([length-5, width-12.5, -0.1]) mhole (); 
+  }
+
+  ethernet ();
+  usb (); 
+  composite (); 
+  audio (); 
+  gpio (); 
+  hdmi ();
+  power ();
+  sd ();
+  }
 }
 
-ethernet ();
-usb (); 
-composite (); 
-audio (); 
-gpio (); 
-hdmi ();
-power ();
-sd ();
-}
-
+rpi (); 
