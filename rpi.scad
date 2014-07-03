@@ -102,6 +102,30 @@ module pcb ()
 		}
 	}
 
+module leds()
+	{
+		// act
+		color([0.9,0.1,0,0.6])
+		translate([length-11.5,width-7.55,height]) led();
+		// pwr
+		color([0.9,0.1,0,0.6])
+		translate([length-9.45,width-7.55,height]) led();
+
+		// fdx
+		color([0.9,0.1,0,0.6])
+		translate([length-6.55,width-7.55,height]) led();
+		// lnk
+		color([0.9,0.1,0,0.6])
+		translate([length-4.5,width-7.55,height]) led();
+		// 100
+		color([0.9,0.1,0,0.6])
+		translate([length-2.45,width-7.55,height]) led();
+	}
+module led()
+	{
+		cube([1.0,1.6,0.7]);
+	}
+
 module rpi ()
 	{
 		pcb ();
@@ -113,6 +137,7 @@ module rpi ()
 		hdmi ();
 		power ();
 		sd ();
+		leds ();
 	}
 
 rpi (); 
